@@ -12,24 +12,13 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/">{{ env('APP_NAME') }}</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Users</a>
-                    </li>
-                </ul>
-            </div>
             <div class="d-flex">
                 @if (Route::has('login'))
                     <div class="py-4">
                         @auth
-                            <a href="{{ url('/home') }}" class="link-info">Home</a>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); logout()" class="link-info">Logout</a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
@@ -48,7 +37,26 @@
         </div>
     </nav>
 
-    <main class="container">
+    @can('logged-in')
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.users.index') }}">Users</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    @endcan
+
+
+    <main class="container mt-3">
+        @include('includes.alerts')
         @yield('content')
     </main>
 
@@ -59,5 +67,6 @@
             document.getElementById('logout-form').submit();
         }
     </script>
+
 </body>
 </html>

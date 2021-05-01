@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -40,6 +41,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /*
+        set + {Attribute:Password} + Attribute : setPasswordAttribute
+        {Attribute} is the cased of the column in DB
+        function to Hash all password when a user is create
+    */
+    public function setPasswordAttribute($password) {
+        $this->attributes['password'] = Hash::make($password);
+    }
 
     public function roles() {
         return $this->belongsToMany('App\Models\Role');
