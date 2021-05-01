@@ -20,9 +20,6 @@ class UserController extends Controller
     {
         // Display all users and paginate
 
-        if(Gate::denies('logged-in')) {
-            dd('no access');
-        }
         return view('admin.users.index', [
             'users' => User::paginate(10)
         ]);
