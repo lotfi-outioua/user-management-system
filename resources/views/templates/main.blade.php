@@ -45,9 +45,11 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.users.index') }}">Users</a>
-                        </li>
+                        @can('is-admin')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.users.index') }}">Users</a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </div>
