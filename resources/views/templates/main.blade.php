@@ -38,7 +38,7 @@
     </nav>
 
     @can('logged-in')
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
             <div class="container">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -57,7 +57,7 @@
     @endcan
 
 
-    <main class="container mt-3">
+    <main class="container mt-2">
         @include('includes.alerts')
         @yield('content')
     </main>
